@@ -1,0 +1,28 @@
+nav {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    margin-right: auto;
+  }
+  li {
+    list-style-type: none;
+    padding-right: 30px;
+    &:first-child {
+      margin-right: auto;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+ion-icon {
+  height: 35px;
+  width: 35px;
+  margin-right: 15px;
+}

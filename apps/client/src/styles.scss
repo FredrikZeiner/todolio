@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://use.typekit.net/cfx2uvq.css');
+
+* {
+  box-sizing: border-box;
+  font-family: sofia-pro;
+  color: var(--color-dark-grey);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+html,
+body,
+main {
+  width: 100%;
+  margin: 0;
+  background: var(--color-light-grey);
+}
+
+:root {
+  --color-very-light-grey: rgb(244, 244, 250);
+  --color-light-grey: rgb(238, 238, 244);
+  --color-medium-grey: rgb(189, 189, 194);
+  --color-dark-grey: rgb(107, 107, 120);
+  --color-medium-red: #e88c8c;
+}

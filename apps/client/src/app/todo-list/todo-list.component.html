@@ -1,0 +1,28 @@
+<section class="todo-container">
+  <input
+    type="text"
+    [formControl]="form"
+    (keyup.enter)="add()"
+    placeholder="Write todo, hit enter."
+  />
+  <section
+    cdkDropList
+    [cdkDropListData]="todos"
+    (cdkDropListDropped)="drop($event)"
+    class="todo-list"
+  >
+    <app-todo-item
+      cdkDrag
+      [cdkDragDisabled]="todo.isEditing"
+      (isEditing)="disableDrag($event)"
+      (changedText)="updateText($event)"
+      (completedEdit)="completeEdit($event)"
+      class="todo-item"
+      *ngFor="let todo of todos"
+      [id]="todo.id"
+      [text]="todo.text"
+      (itemDeleted)="delete($event)"
+      >{{ todo.name }}</app-todo-item
+    >
+  </section>
+</section>

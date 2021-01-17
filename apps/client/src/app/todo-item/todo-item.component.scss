@@ -1,0 +1,83 @@
+ion-icon {
+  font-size: 24px;
+  color: var(--color-medium-red);
+}
+
+button {
+  visibility: hidden;
+  border: none;
+  background: none;
+  padding: 10px 12px;
+  border-radius: 5px;
+  outline: none;
+  display: flex;
+  justify-self: flex-end;
+  &:hover {
+    background: var(--color-very-light-grey);
+  }
+}
+
+input[type='checkbox'] {
+  display: none;
+}
+
+input[type='checkbox']:hover + .checkbox {
+  box-shadow: inset 0px 0px 0px 4px white;
+  background-color: #5ec095;
+  border: 2px solid #5ec095;
+}
+
+.checkbox-container {
+  padding: 10px;
+  padding-left: 5px;
+  display: flex;
+}
+
+.checkbox {
+  border: 2px solid var(--color-medium-grey);
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.todo-item {
+  width: 100%;
+  background: white;
+  display: flex;
+  align-items: center;
+}
+
+.todo-text {
+  margin-right: auto;
+  margin-left: 5px;
+  padding-bottom: 3px;
+  min-width: 10%;
+  display: flex;
+  span {
+    display: inline-block;
+    cursor: text;
+    outline: none;
+    width: 100%;
+  }
+}
+
+.todo-item:hover button {
+  visibility: visible;
+}
+
+.fade {
+  opacity: 0;
+  animation-duration: 150ms;
+  animation-name: fade-out;
+  animation-iteration-count: 1;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -9,25 +9,37 @@ import { ITodoItem } from './todo-item.model';
 export class TodoItemComponent {
   @Output() itemDeleted = new EventEmitter<ITodoItem>();
   @Output() isEditing = new EventEmitter<ITodoItem>();
-  @Output() completedEdit = new EventEmitter<ITodoItem>();
-  @Output() changedText = new EventEmitter<ITodoItem>();
+  @Output() completeEdit = new EventEmitter();
+  @Output() updateText = new EventEmitter<ITodoItem>();
+  @Output() toggleDragging = new EventEmitter<{
+    id: string;
+    disabled: boolean;
+  }>();
   @Input() id: string;
   @Input() text: string;
   isDone = false;
   isDeleted = false;
 
+  activateDragging() {
+    this.toggleDragging.emit({ id: this.id, disabled: false });
+  }
+
+  disableDragging() {
+    this.toggleDragging.emit({ id: this.id, disabled: true });
+  }
+
   startEdit() {
     this.isEditing.emit({ id: this.id, text: this.text });
   }
 
-  stopEdit(event, shouldBlur) {
-    event.preventDefault();
-    if (shouldBlur) event.srcElement.blur();
-    this.completedEdit.emit({ id: this.id, text: this.text });
+  stopEdit(event) {
+    event.srcElement.blur();
+    this.activateDragging();
+    this.completeEdit.emit({ id: this.id, text: event.target.innerText });
   }
 
-  updateText(text: string) {
-    this.changedText.emit({ id: this.id, text });
+  changeText(text: string) {
+    this.updateText.emit({ id: this.id, text });
   }
 
   complete() {

@@ -6,11 +6,11 @@
   <div class="todo-text">
     <span
       contenteditable="true"
-      (mouseover)="startEdit()"
-      (mouseleave)="stopEdit($event, false)"
-      (input)="updateText($event.target.innerText)"
-      (blur)="stopEdit($event, true)"
-      (keydown.enter)="stopEdit($event, true)"
+      (mouseover)="disableDragging(); startEdit()"
+      (mouseleave)="activateDragging()"
+      (input)="changeText($event.target.innerText)"
+      (blur)="stopEdit($event)"
+      (keydown.enter)="stopEdit($event)"
       >{{ text }}</span
     >
   </div>

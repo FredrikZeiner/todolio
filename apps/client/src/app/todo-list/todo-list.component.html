@@ -14,9 +14,9 @@
     <app-todo-item
       cdkDrag
       [cdkDragDisabled]="todo.isEditing"
-      (isEditing)="disableDrag($event)"
-      (changedText)="updateText($event)"
-      (completedEdit)="completeEdit($event)"
+      (updateText)="updateText($event)"
+      (toggleDragging)="toggleDragging($event)"
+      (completeEdit)="completeEdit($event)"
       class="todo-item"
       *ngFor="let todo of todos"
       [id]="todo.id"

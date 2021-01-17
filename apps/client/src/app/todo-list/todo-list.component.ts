@@ -19,22 +19,23 @@ export class TodoListComponent implements OnInit {
 
   constructor(private storage: StorageService) {}
 
-  async ngOnInit() {
-    await this.refresh().catch(handle);
-  }
-
-  public disableDrag(item: ITodoItem) {
-    const todo = this.todos.find((todo) => todo.id === item.id);
-    todo.isEditing = true;
-  }
-
-  public completeEdit(item: ITodoItem) {
-    const todo = this.todos.find((todo) => todo.id === item.id);
-    todo.isEditing = false;
+  ngOnInit() {
+    this.refresh().catch(handle);
+    this.reindex().catch(handle);
   }
 
   public undoDelete() {
     console.log('here');
+  }
+
+  toggleDragging(item: { id: string; disabled: boolean }) {
+    const todo = this.todos.find((todo) => todo.id === item.id);
+    todo.isEditing = item.disabled;
+  }
+
+  completeEdit(item: ITodoItem) {
+    const todo = this.todos.find((todo) => todo.id === item.id);
+    todo.text = item.text;
   }
 
   public async add() {
@@ -58,6 +59,7 @@ export class TodoListComponent implements OnInit {
   public async delete(item: ITodoItem) {
     await this.storage.todos.delete(item.id).catch(handle);
     await this.refresh().catch(handle);
+    await this.reindex().catch(handle);
   }
 
   public async drop(event: CdkDragDrop<string[]>) {
@@ -67,21 +69,20 @@ export class TodoListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      await this.update().catch(handle);
+      await this.reindex().catch(handle);
     }
   }
 
   private async refresh() {
     this.todos = await this.storage.todos.orderBy('index').toArray();
-    await this.update().catch(handle);
   }
 
-  private async update() {
-    this.todos = this.todos.map((todo, i) => ({
+  private async reindex() {
+    const todos = this.todos.map((todo, i) => ({
       ...todo,
-      isEditing: false,
       index: i,
     }));
-    await this.storage.todos.bulkPut(this.todos).catch(handle);
+
+    await this.storage.todos.bulkPut(todos).catch(handle);
   }
 }

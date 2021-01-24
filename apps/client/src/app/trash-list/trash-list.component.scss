@@ -1,0 +1,33 @@
+.todo-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.empty-button {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background: var(--color-medium-red);
+  padding: 3px;
+  line-height: 1;
+  --padding-x: 0.6em;
+  padding: 0.5em var(--padding-x);
+  height: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  p {
+    font-size: 14px;
+    color: white;
+    padding-bottom: 2.5px;
+    padding-right: 3px;
+  }
+  ion-icon {
+    color: white;
+    font-size: 18px;
+    padding-right: 8px;
+  }
+}

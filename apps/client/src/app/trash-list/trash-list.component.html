@@ -1,5 +1,11 @@
 <section class="todo-container">
-  <h1>Trash</h1>
+  <section class="todo-header">
+    <h1>Trash</h1>
+    <button *ngIf="todos.length" class="empty-button" (click)="deleteAll()">
+      <ion-icon name="trash-outline"></ion-icon>
+      <p>Empty</p>
+    </button>
+  </section>
   <section class="todo-list">
     <app-todo-item
       class="todo-item"

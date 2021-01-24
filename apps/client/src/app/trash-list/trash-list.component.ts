@@ -36,6 +36,12 @@ export class TrashListComponent implements OnInit {
     await this.reindex().catch(handle);
   }
 
+  public async deleteAll() {
+    await this.storage.todos.bulkDelete(this.todos.map((todo) => todo.id));
+    await this.refresh().catch(handle);
+    await this.reindex().catch(handle);
+  }
+
   private async refresh() {
     this.todos = await this.storage.todos
       .where({

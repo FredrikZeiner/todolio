@@ -6,8 +6,8 @@
   "npmRebuild": false,
   "asar": true,
   "mac": {
-    "target": "pkg",
-    "icon": "../assets/icon.icns"
+    "target": "dmg",
+    "icon": "./apps/desktop/build/icon.png"
   },
   "appx": {
     "displayName": "Todolio",

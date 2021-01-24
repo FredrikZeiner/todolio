@@ -58,8 +58,8 @@ export default class App {
 
   private static initMainWindow() {
     const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
-    const width = Math.min(500, workAreaSize.width || 500);
-    const height = Math.min(600, workAreaSize.height || 600);
+    const width = Math.min(1000, workAreaSize.width || 1000);
+    const height = Math.min(700, workAreaSize.height || 700);
 
     // Create the browser window.
     App.mainWindow = new BrowserWindow({
@@ -116,7 +116,6 @@ export default class App {
     // Electron.BrowserWindow into this function
     // so this class has no dependencies. This
     // makes the code easier to write tests for
-    console.log(__dirname, 'assets/icon.icns');
 
     app.dock.setIcon(join(__dirname, 'assets/icon.png'));
 

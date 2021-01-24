@@ -1,0 +1,17 @@
+<section class="todo-container">
+  <h1>Archive</h1>
+  <section class="todo-list">
+    <app-todo-item
+      class="todo-item"
+      *ngFor="let todo of todos"
+      [id]="todo.id"
+      [text]="todo.text"
+      [completeable]="false"
+      [editable]="false"
+      [revivable]="true"
+      (itemDeleted)="delete($event)"
+      (itemPutBack)="putBack($event)"
+      >{{ todo.name }}</app-todo-item
+    >
+  </section>
+</section>

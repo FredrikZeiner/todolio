@@ -11,7 +11,7 @@ export class StorageService extends Dexie {
   constructor() {
     super('todolio-db');
     this.version(1).stores({
-      todos: 'id,date,text,done,index',
+      todos: 'id, date, text, index, status, createdAt, updatedAt',
     });
   }
 }

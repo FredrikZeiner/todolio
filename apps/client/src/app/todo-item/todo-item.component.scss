@@ -1,13 +1,21 @@
 ion-icon {
   font-size: 24px;
+}
+
+ion-icon[name='trash-outline'] {
   color: var(--color-medium-red);
 }
 
+ion-icon[name='arrow-undo-outline'] {
+  color: var(--color-medium-green);
+}
+
 button {
-  visibility: hidden;
   border: none;
   background: none;
   padding: 10px 12px;
+  margin-right: 10px;
+  height: 45px;
   border-radius: 5px;
   outline: none;
   display: flex;
@@ -27,6 +35,25 @@ input[type='checkbox']:hover + .checkbox {
   border: 2px solid #5ec095;
 }
 
+.action-buttons {
+  visibility: hidden;
+  display: flex;
+  padding-left: 40px;
+  position: absolute;
+  align-content: flex-end;
+  right: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.9) 20%,
+    rgba(255, 255, 255, 1) 60%
+  );
+  height: 100%;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
 .checkbox-container {
   padding: 10px;
   padding-left: 5px;
@@ -39,13 +66,6 @@ input[type='checkbox']:hover + .checkbox {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-}
-
-.todo-item {
-  width: 100%;
-  background: white;
-  display: flex;
-  align-items: center;
 }
 
 .todo-text {
@@ -62,15 +82,15 @@ input[type='checkbox']:hover + .checkbox {
   }
 }
 
-.todo-item:hover button {
-  visibility: visible;
-}
-
 .fade {
   opacity: 0;
   animation-duration: 150ms;
   animation-name: fade-out;
   animation-iteration-count: 1;
+}
+
+.draggable {
+  cursor: move;
 }
 
 @keyframes fade-out {

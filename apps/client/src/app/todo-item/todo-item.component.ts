@@ -8,6 +8,8 @@ import { ITodoItem } from './todo-item.model';
 })
 export class TodoItemComponent {
   @Output() itemDeleted = new EventEmitter<ITodoItem>();
+  @Output() itemArchived = new EventEmitter<ITodoItem>();
+  @Output() itemPutBack = new EventEmitter<ITodoItem>();
   @Output() isEditing = new EventEmitter<ITodoItem>();
   @Output() completeEdit = new EventEmitter();
   @Output() updateText = new EventEmitter<ITodoItem>();
@@ -17,6 +19,9 @@ export class TodoItemComponent {
   }>();
   @Input() id: string;
   @Input() text: string;
+  @Input() completeable = true;
+  @Input() editable = true;
+  @Input() revivable = true;
   isDone = false;
   isDeleted = false;
 
@@ -42,15 +47,26 @@ export class TodoItemComponent {
     this.updateText.emit({ id: this.id, text });
   }
 
-  complete() {
-    this.isDone = true;
-    this.delete();
-  }
-
   delete() {
     this.isDeleted = true;
     setTimeout(
       () => this.itemDeleted.emit({ id: this.id, text: this.text }),
+      150
+    );
+  }
+
+  archive() {
+    this.isDone = true;
+    setTimeout(
+      () => this.itemArchived.emit({ id: this.id, text: this.text }),
+      150
+    );
+  }
+
+  putBack() {
+    this.isDone = true;
+    setTimeout(
+      () => this.itemPutBack.emit({ id: this.id, text: this.text }),
       150
     );
   }

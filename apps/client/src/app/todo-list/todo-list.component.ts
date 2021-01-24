@@ -5,6 +5,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { v4 as uuid } from 'uuid';
 
 import { StorageService } from '../storage/storage.service';
+import { TodoStatus } from '../../types';
 
 const handle = (error) => console.log(error);
 
@@ -45,6 +46,9 @@ export class TodoListComponent implements OnInit {
         id: uuid(),
         text: newTodoText,
         index: this.todos.length,
+        status: TodoStatus.ACTIVE,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
       await this.refresh().catch(handle);
       this.form.reset();
@@ -57,7 +61,25 @@ export class TodoListComponent implements OnInit {
   }
 
   public async delete(item: ITodoItem) {
-    await this.storage.todos.delete(item.id).catch(handle);
+    await this.storage.todos
+      .update(item.id, { status: TodoStatus.DELETED, updatedAt: new Date() })
+      .catch(handle);
+    await this.refresh().catch(handle);
+    await this.reindex().catch(handle);
+  }
+
+  public async archive(item: ITodoItem) {
+    await this.storage.todos
+      .update(item.id, { status: TodoStatus.ARCHIVED, updatedAt: new Date() })
+      .catch(handle);
+    await this.refresh().catch(handle);
+    await this.reindex().catch(handle);
+  }
+
+  public async putBack(item: ITodoItem) {
+    await this.storage.todos
+      .update(item.id, { status: TodoStatus.ACTIVE, updatedAt: new Date() })
+      .catch(handle);
     await this.refresh().catch(handle);
     await this.reindex().catch(handle);
   }
@@ -74,7 +96,9 @@ export class TodoListComponent implements OnInit {
   }
 
   private async refresh() {
-    this.todos = await this.storage.todos.orderBy('index').toArray();
+    this.todos = await this.storage.todos
+      .where({ status: TodoStatus.ACTIVE })
+      .sortBy('index');
   }
 
   private async reindex() {

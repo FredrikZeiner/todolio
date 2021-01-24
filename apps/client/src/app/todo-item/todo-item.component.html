@@ -1,11 +1,15 @@
-<article class="todo-item" [class.fade]="isDone || isDeleted">
-  <div class="checkbox-container">
-    <input (click)="complete()" type="checkbox" id="{{ id }}" />
+<article
+  class="todo-item-inner"
+  [class.draggable]="editable"
+  [class.fade]="isDone || isDeleted"
+>
+  <div *ngIf="completeable" class="checkbox-container">
+    <input (click)="archive()" type="checkbox" id="{{ id }}" />
     <label class="checkbox" for="{{ id }}"></label>
   </div>
   <div class="todo-text">
     <span
-      contenteditable="true"
+      [attr.contenteditable]="editable"
       (mouseover)="disableDragging(); startEdit()"
       (mouseleave)="activateDragging()"
       (input)="changeText($event.target.innerText)"
@@ -14,7 +18,12 @@
       >{{ text }}</span
     >
   </div>
-  <button (click)="delete()">
-    <ion-icon name="trash-outline"></ion-icon>
-  </button>
+  <div class="action-buttons">
+    <button (click)="putBack()" *ngIf="revivable">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </button>
+    <button (click)="delete()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+  </div>
 </article>

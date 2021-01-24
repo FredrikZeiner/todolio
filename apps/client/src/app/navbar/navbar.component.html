@@ -1,7 +1,16 @@
 <nav class="navbar">
-  <ion-icon src="assets/logo.svg"></ion-icon>
-  <ul>
-    <li>Todolio</li>
-    <li>github</li>
-  </ul>
+  <section class="menu">
+    <ul>
+      <li routerLink="/todos" routerLinkActive="active">
+        <ion-icon class="icon" name="checkbox-outline"></ion-icon>
+      </li>
+      <li routerLink="/archive" routerLinkActive="active">
+        <ion-icon class="icon" name="archive-outline"></ion-icon>
+      </li>
+      <li routerLink="/trash" routerLinkActive="active">
+        <ion-icon class="icon" name="trash-outline"></ion-icon>
+      </li>
+    </ul>
+  </section>
+  <ion-icon class="logo" src="assets/logo.svg"></ion-icon>
 </nav>

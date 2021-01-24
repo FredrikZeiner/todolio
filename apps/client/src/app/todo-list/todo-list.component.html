@@ -1,10 +1,5 @@
 <section class="todo-container">
-  <input
-    type="text"
-    [formControl]="form"
-    (keyup.enter)="add()"
-    placeholder="Write todo, hit enter."
-  />
+  <h1>Todos</h1>
   <section
     cdkDropList
     [cdkDropListData]="todos"
@@ -22,7 +17,19 @@
       [id]="todo.id"
       [text]="todo.text"
       (itemDeleted)="delete($event)"
+      (itemArchived)="archive($event)"
+      (itemPutBack)="putBack($event)"
+      [revivable]="false"
       >{{ todo.name }}</app-todo-item
     >
+  </section>
+  <section class="todo-input-container">
+    <input
+      class="todo-input"
+      type="text"
+      [formControl]="form"
+      (keyup.enter)="add()"
+      placeholder="Write todo, hit enter."
+    />
   </section>
 </section>

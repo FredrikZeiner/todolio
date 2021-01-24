@@ -1,12 +1,28 @@
 {
   "name": "todolio",
+  "author": "Fredrik Zeiner-Gundersen",
+  "description": "The worlds most simple todo app",
   "version": "0.0.0",
   "license": "MIT",
+  "build": {
+    "files": [
+      "**/*",
+      "build/icon.*"
+    ],
+    "mac": {
+      "icon": "/apps/desktop/src/assets/icon.icns"
+    }
+  },
   "scripts": {
     "ng": "nx",
-    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+    "postinstall": "exitzero electron-builder install-app-deps",
     "nx": "nx",
     "dev": "nx serve & nx serve api",
+    "desktop": "nx serve & nx serve api & nx serve desktop",
+    "desktop:package": "nx run desktop:package --platform=mac --arch=x64 --publishPolicy=always",
+    "desktop:pack": "electron-packager ./dist/apps/desktop --overwrite --platform=darwin --arch=x64 --icon=./apps/desktop/build/icon.icns --prune=true --out=dist/packages/mac",
+    "desktop:make": "nx run desktop:make --platform=mac --arch=x64 --publishPolicy=always",
+    "desktop:package:make": "nx build --baseHref=./ && npm run desktop:package && npm run desktop:make",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
@@ -68,11 +84,15 @@
     "codelyzer": "^6.0.0",
     "cypress": "^6.0.1",
     "dotenv": "6.2.0",
+    "electron": "^11.2.1",
+    "electron-packager": "^15.2.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-cypress": "^2.10.3",
+    "exitzero": "^1.0.1",
     "jest": "26.2.2",
     "jest-preset-angular": "8.3.1",
+    "nx-electron": "^10.0.3",
     "prettier": "2.2.1",
     "ts-jest": "26.4.0",
     "ts-node": "~9.1.1",

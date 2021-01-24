@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../../../node_modules/nx-electron/src/validation/maker.schema.json",
+  "productName": "Todolio",
+  "copyright": "Copyright © 2021 Fredrik Zeiner-Gundersen",
+  "electronCompile": false,
+  "npmRebuild": false,
+  "asar": true,
+  "mac": {
+    "target": "pkg",
+    "icon": "../assets/icon.icns"
+  },
+  "appx": {
+    "displayName": "Todolio",
+    "publisherDisplayName": "Fredrik Zeiner-Gundersen",
+    "backgroundColor": "transparent"
+  }
+}
